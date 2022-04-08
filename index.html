@@ -10,22 +10,18 @@
     
 </body>
     <script>
-        // Как избежать мутаций объектов?
-        // Вариант 1
-        const person = {
-            name: 'Bob',
-            age: 26,
-            info: {
-                new: 27
-            }
+        // Функции - передача значения по ссылке
+        function incPersonAge(person){
+            const updatePerson = Object.assign({}, person)      // создаем копию
+            updatePerson.age += 1
+            return updatePerson
         }
-        const personCopy = JSON.parse( JSON.stringify(person) );
-        personCopy.name = 'Alice';
-        personCopy.info.new = 29;
-        console.log('person.name', person.name);                      // Bob
-        console.log('personCopy.name', personCopy.name);              // Alice
-        // Здесь вложенные ссылки не сохранятся
-        console.log(personCopy.info.new);
-        console.log(person.info.new);
+        const personOne = {
+            name: 'Bob',
+            age: 21
+        }
+        const updatePersonOne = incPersonAge(personOne)
+        console.log(personOne.age)          // 21
+        console.log(updatePersonOne.age)    // 22
     </script>
 </html>
