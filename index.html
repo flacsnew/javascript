@@ -19,13 +19,13 @@
                 new: 27
             }
         }
-        const personCopy = { ...person }
+        const personCopy = JSON.parse( JSON.stringify(person) );
         personCopy.name = 'Alice';
-        personCopy.info.new = 28;
+        personCopy.info.new = 29;
         console.log('person.name', person.name);                      // Bob
         console.log('personCopy.name', personCopy.name);              // Alice
-        // со вложенными тоже не работает
-        console.log('person.info.new', person.info.new);              // 28         
-        console.log('personCopy.info.new', personCopy.info.new);      // 28
+        // Здесь вложенные ссылки не сохранятся
+        console.log(personCopy.info.new);
+        console.log(person.info.new);
     </script>
 </html>
