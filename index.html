@@ -10,14 +10,23 @@
     
 </body>
     <script>
-        const objA = {
-            a: 10,
-            b: true
+        const myCity = {
+            city: 'New York',
         }
-        const copyA = objA;
-        copyA.a = 20;           // меняем свойство
-        copyA.c = 'flacs';      // добавляем новое свойство в object
-        console.log(objA.a);    // objA.a = 20
-        console.log(objA.c);
+        //myCity.popular = true;
+
+        // Доступ к значению объекта с использованием квадратных скобок.
+        // Такая запись используется когда надо обратится к свойству объекта через переменную
+        const propertyName = 'popular';
+        myCity[propertyName] = true;
+        
+        console.log(myCity);        // {city: 'New York', popular: true}
+
+        myCity.country = 'USA';
+        console.log(myCity);        // {city: 'New York', popular: true, country: 'USA'}
+
+        delete myCity.city;         // удаление свойства в объекте
+        console.log(myCity);        // {popular: true, country: 'USA'}
+
     </script>
 </html>
