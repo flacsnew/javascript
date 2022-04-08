@@ -10,23 +10,12 @@
     
 </body>
     <script>
-        const myCity = {
-            city: 'New York',
+        // JSON
+        const post = {
+            title: "My post",
+            likes: 5
         }
-        //myCity.popular = true;
-
-        // Доступ к значению объекта с использованием квадратных скобок.
-        // Такая запись используется когда надо обратится к свойству объекта через переменную
-        const propertyName = 'popular';
-        myCity[propertyName] = true;
-        
-        console.log(myCity);        // {city: 'New York', popular: true}
-
-        myCity.country = 'USA';
-        console.log(myCity);        // {city: 'New York', popular: true, country: 'USA'}
-
-        delete myCity.city;         // удаление свойства в объекте
-        console.log(myCity);        // {popular: true, country: 'USA'}
-
+        const postCoded = JSON.stringify(post);
+        console.log( JSON.parse(postCoded) );
     </script>
 </html>
