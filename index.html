@@ -19,17 +19,13 @@
                 new: 27
             }
         }
-        // Если у объекта есть вложенные объекты, то ссылки на них сохраняются
-        const personCopy = Object.assign({}, person);
-        
-        personCopy.age = 27;
-        personCopy.info.new = 30;
-
-        console.log('person.age', person.age);                      // 26
-        console.log('personCopy.age', personCopy.age);              // 27
-        // не будет работать со вложенными (только 1 уровня)
-        console.log('person.info.new', person.info.new);            // 30
-        console.log('personCopy.info.new', personCopy.info.new);    // 30
-        
+        const personCopy = { ...person }
+        personCopy.name = 'Alice';
+        personCopy.info.new = 28;
+        console.log('person.name', person.name);                      // Bob
+        console.log('personCopy.name', personCopy.name);              // Alice
+        // со вложенными тоже не работает
+        console.log('person.info.new', person.info.new);              // 28         
+        console.log('personCopy.info.new', personCopy.info.new);      // 28
     </script>
 </html>
