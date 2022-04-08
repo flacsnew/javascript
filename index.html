@@ -10,12 +10,26 @@
     
 </body>
     <script>
-        // JSON
-        const post = {
-            title: "My post",
-            likes: 5
+        // Как избежать мутаций объектов?
+        // Вариант 1
+        const person = {
+            name: 'Bob',
+            age: 26,
+            info: {
+                new: 27
+            }
         }
-        const postCoded = JSON.stringify(post);
-        console.log( JSON.parse(postCoded) );
+        // Если у объекта есть вложенные объекты, то ссылки на них сохраняются
+        const personCopy = Object.assign({}, person);
+        
+        personCopy.age = 27;
+        personCopy.info.new = 30;
+
+        console.log('person.age', person.age);                      // 26
+        console.log('personCopy.age', personCopy.age);              // 27
+        // не будет работать со вложенными (только 1 уровня)
+        console.log('person.info.new', person.info.new);            // 30
+        console.log('personCopy.info.new', personCopy.info.new);    // 30
+        
     </script>
 </html>
