@@ -10,16 +10,13 @@
     
 </body>
     <script>
-            const button = {
-                width: 200,
-                text: 'Buy'
+            // Функциональные выражения
+            const myFn = function(a,b){
+                let c = (a + 1) + b
+                return c
             }
 
-            const redButton = {
-                ...button,
-                color: 'red'        // Если у объекта уже есть такое свойство, оно будет перезаписано
-            }
-
-            console.table(redButton)
+            console.log(myFn(5, 3))
+            
     </script>
 </html>
