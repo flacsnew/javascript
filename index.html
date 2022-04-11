@@ -10,11 +10,16 @@
     
 </body>
     <script>
-            console.log(Boolean(10))  		// true
-			console.log(Boolean(0))   		// false
-			console.log(Boolean('abc'))		// true
-			console.log(Boolean(''))		// false
-			console.log(Boolean(true))		// true
-			console.log(Boolean(undefined))	// false
+            const button = {
+                width: 200,
+                text: 'Buy'
+            }
+
+            const redButton = {
+                ...button,
+                color: 'red'        // Если у объекта уже есть такое свойство, оно будет перезаписано
+            }
+
+            console.table(redButton)
     </script>
 </html>
