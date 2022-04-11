@@ -10,18 +10,12 @@
     
 </body>
     <script>
-        // Функции - передача значения по ссылке
-        function incPersonAge(person){
-            const updatePerson = Object.assign({}, person)      // создаем копию
-            updatePerson.age += 1
-            return updatePerson
+        function printMyName(){
+            console.log('flacs');
         }
-        const personOne = {
-            name: 'Bob',
-            age: 21
-        }
-        const updatePersonOne = incPersonAge(personOne)
-        console.log(personOne.age)          // 21
-        console.log(updatePersonOne.age)    // 22
+
+        console.log('Start...');
+        setTimeout(printMyName, 1000);
+
     </script>
 </html>
