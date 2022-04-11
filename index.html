@@ -10,12 +10,20 @@
     
 </body>
     <script>
-        function printMyName(){
-            console.log('flacs');
+        // Области видимости
+        let a
+        let b
+
+        function myFn(){
+            let b
+            a = true
+            b = 10
+            console.log( 'Local b: ' ,b)  // 10
         }
 
-        console.log('Start...');
-        setTimeout(printMyName, 1000);
+        myFn()
+        console.log('Global a: ', a)  // true
+        console.log('Global b: ', b)  // undefined
 
     </script>
 </html>
