@@ -10,13 +10,25 @@
     
 </body>
     <script>
-            // Функциональные выражения
-            const myFn = function(a,b){
-                let c = (a + 1) + b
-                return c
-            }
+        // Стрелочные функции
+        const myFn = (a, b) => {
+            let c = (a + 1) + b
+            return c
+        }
+		console.log(myFn(5,3))
 
-            console.log(myFn(5, 3))
-            
+        // Сокращенная запись
+        // 1. Если у функции только один параметр, то круглые скобки можно опустить
+        const short_one = a => {
+			return a
+		}
+        // 2. Фигурные скобки можно опустить если в теле функции содержит одно выражение.
+		// В этом случае стрелочная функция неявно возвращает результат выражения.
+        const short_two = (a, b) => a + b
+
+        // --
+        console.log( short_one(3) )
+        console.log( short_two(2,3) )
+
     </script>
 </html>
