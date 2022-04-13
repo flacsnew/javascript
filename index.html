@@ -11,11 +11,14 @@
 </body>
     <script>
         // Массивы
-        // Формат записи массивов
-        const myArray = [1, 2, 3]
-        console.log(myArray)
+        const myArray = [1, true, 'flacs']
+        const myArray2 = [1, true, 'flacs']
 
-        const myArray2 = new Array (1, 2, 3)
-        console.log(myArray2)
+        console.log( myArray === myArray2 )     // false
+
+        const myArray3 = myArray
+        console.log( myArray3 === myArray )     // true
+
+
     </script>
 </html>
