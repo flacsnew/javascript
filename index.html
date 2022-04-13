@@ -10,16 +10,12 @@
     
 </body>
     <script>
-        // Обработка ошибок
-        const fnError = () => {
-            throw new Error ('Some Error')
-        }
-        try {
-            fnError()
-        } catch (error){
-            console.error(error)
-            console.log(error.message)
-        }
-        console.log('Continue...')
+        // Массивы
+        // Формат записи массивов
+        const myArray = [1, 2, 3]
+        console.log(myArray)
+
+        const myArray2 = new Array (1, 2, 3)
+        console.log(myArray2)
     </script>
 </html>
