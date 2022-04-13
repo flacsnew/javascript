@@ -11,14 +11,28 @@
 </body>
     <script>
         // Массивы
-        const myArray = [1, true, 'flacs']
-        const myArray2 = [1, true, 'flacs']
+        const myArray = [1, 2, 3]
+        console.log(myArray)        // [1, 2, 3]
+        // --
+        myArray.push(4)             // Добавление в конец массива
+        console.log(myArray)        // [1, 2, 3, 4]
 
-        console.log( myArray === myArray2 )     // false
+        myArray.pop()               // Удаляет последний элемент в массиве
+        console.log(myArray)        // [1, 2, 3]
 
-        const myArray3 = myArray
-        console.log( myArray3 === myArray )     // true
+        myArray.unshift(true)       // Добавляет элемент в начало массива
+        console.log(myArray)        // [true, 1, 2, 3, 4]
 
+        myArray.shift()             // Удаляет первый элемент массива
+        console.log(myArray)        // [1, 2, 3, 4]
+
+        // Выполнение действий с каждым элементом массива
+        myArray.forEach(el => console.log(el * 2))      // 2, 4, 6
+        console.log(myArray)
+
+        const newArray = myArray.map(el => el * 3)    // возвращает новый массив
+        console.log(newArray)       // [3, 6, 9]
+        console.log(myArray)        // [1, 2, 3] - оригинальный массив не изменился
 
     </script>
 </html>
