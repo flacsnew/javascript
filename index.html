@@ -10,29 +10,34 @@
     
 </body>
     <script>
-        // Массивы
-        const myArray = [1, 2, 3]
-        console.log(myArray)        // [1, 2, 3]
-        // --
-        myArray.push(4)             // Добавление в конец массива
-        console.log(myArray)        // [1, 2, 3, 4]
+        // Деструктуризация объектов
 
-        myArray.pop()               // Удаляет последний элемент в массиве
-        console.log(myArray)        // [1, 2, 3]
+        const userProfile = {
+            name: 'flacs',
+            commentCnt: 23,
+            hasFlag: true
+        }
+        // Объявление новых переменных и присваивание значений на основе значений свойств объекта
+        const { name, commentCnt } = userProfile
+        const { hasFlag } = userProfile
+        console.log(name)           // flacs
+        console.log(commentCnt)     // 23
+        // Деструктуризация массивов
 
-        myArray.unshift(true)       // Добавляет элемент в начало массива
-        console.log(myArray)        // [true, 1, 2, 3, 4]
+        const fruits = ['Apple', 'Banana']
+        // Объявление новых переменных и присваивание значений на основе значений свойств массива
+        const [ fruitOne, fruitTwo ] = fruits
+        console.log(fruitOne)       // Apple
+        console.log(fruitTwo)       // Banana
 
-        myArray.shift()             // Удаляет первый элемент массива
-        console.log(myArray)        // [1, 2, 3, 4]
-
-        // Выполнение действий с каждым элементом массива
-        myArray.forEach(el => console.log(el * 2))      // 2, 4, 6
-        console.log(myArray)
-
-        const newArray = myArray.map(el => el * 3)    // возвращает новый массив
-        console.log(newArray)       // [3, 6, 9]
-        console.log(myArray)        // [1, 2, 3] - оригинальный массив не изменился
-
+        // Деструктуризация в функциях
+        const userInfo = ({ name, commentCnt }) => {
+            if (!commentCnt){
+                return `User ${name} has no comment`
+            }
+            return `User ${name} has ${commentCnt} comments`
+        }
+        console.log(userInfo(userProfile))  // User flacs 23 comments
+        
     </script>
 </html>
