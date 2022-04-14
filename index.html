@@ -10,34 +10,19 @@
     
 </body>
     <script>
-        // Деструктуризация объектов
+        // Условные операторы
+        const value = true
 
-        const userProfile = {
-            name: 'flacs',
-            commentCnt: 23,
-            hasFlag: true
-        }
-        // Объявление новых переменных и присваивание значений на основе значений свойств объекта
-        const { name, commentCnt } = userProfile
-        const { hasFlag } = userProfile
-        console.log(name)           // flacs
-        console.log(commentCnt)     // 23
-        // Деструктуризация массивов
+        value
+            ? console.log('Условие истинно')
+            : console.log('Условие ложно')
 
-        const fruits = ['Apple', 'Banana']
-        // Объявление новых переменных и присваивание значений на основе значений свойств массива
-        const [ fruitOne, fruitTwo ] = fruits
-        console.log(fruitOne)       // Apple
-        console.log(fruitTwo)       // Banana
+        let value1 = 11
+        console.log( value1 >= 0 ? value1 : -value1 )   // 11
 
-        // Деструктуризация в функциях
-        const userInfo = ({ name, commentCnt }) => {
-            if (!commentCnt){
-                return `User ${name} has no comment`
-            }
-            return `User ${name} has ${commentCnt} comments`
-        }
-        console.log(userInfo(userProfile))  // User flacs 23 comments
-        
+        let value2 = -5
+        const res = value2 >= 0 ? value2 : -value2
+        console.log(res)                                // 5
+
     </script>
 </html>
