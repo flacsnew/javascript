@@ -10,51 +10,27 @@
     
 </body>
     <script>
-        // Цикл foreach для массивов
-        const myArray = ['first', 'second', 'third']
-        myArray.forEach((element, index) => {
-            console.log(element, index)
-        })
-        // Цикл while
-        let i = 0
-        while (i < 5) {
-            console.log('i=', i)
-            i++
+        // for of - для строк
+        const myString = 'Hey'
+        for (const letter of myString)
+        {
+            console.log(letter)
         }
-        // Цикл do while
-        let j = 10
-        do {
-            console.log('j=', j)
-            j++
-        } while (j < 5)
-        // ---
-        const myObject = {
+        // for of - для массивов
+        const myArray = [true, 10, 'abc', null]
+        for (const element of myArray)
+        {
+            console.log(element)
+        }
+        // for of - нельзя использовать для объектов
+        /*let myObject = {
             x: 10,
             y: true,
             z: 'abc'
         }
-        // Цикл for .. in
-        for (const key in myObject)
+        for (const prop of myObject)
         {
-            console.log(key, myObject[key])
-        }
-        
-        Object.keys(myObject).forEach(key => {
-            console.log(key, myObject[key])
-        })
-        
-        Object.values(myObject).forEach(value => {
-            console.log(value)
-        })
-
-        const myObj = {
-            name: 'flacs',
-            isAuthor: false
-        }
-        // Object.keys - получение всех ключей объекта в виде массива
-        console.log(Object.keys(myObj))
-        // Object.values - получение всех значений свойств объекта в виде массива
-        console.log(Object.values(myObj))
-        
+            console.log(prop)
+        }*/
     </script>
 </html>
