@@ -24,5 +24,21 @@
         const firstComment = new Comment('First Comment')   // создание экземпляра класса
         console.log(firstComment)
 
+        
+        console.log( firstComment instanceof Comment )      // true
+        console.log( firstComment instanceof Object )       // true
+        firstComment.upvote()
+        console.log(firstComment.votes)
+        firstComment.upvote()               // Методы можно вызывать многократно
+        console.log(firstComment.votes)
+        
+        // ---
+        console.log('text:', firstComment.hasOwnProperty('text'))        // true
+        console.log('votes:', firstComment.hasOwnProperty('votes'))       // true
+
+        console.log('upvote:', firstComment.hasOwnProperty('upvote'))      // false
+        console.log('hasOwnProperty:', firstComment.hasOwnProperty('hasOwnProperty'))      // false
+
+        
     </script>
 </html>
