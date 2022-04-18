@@ -10,27 +10,19 @@
     
 </body>
     <script>
-        // for of - для строк
-        const myString = 'Hey'
-        for (const letter of myString)
-        {
-            console.log(letter)
+        // Классы и прототипы
+        
+        class Comment {
+            constructor(text){
+                this.text = text    // переменная this указывает на экземпляр класса
+                this.votes = 0
+            }
+            upvote(){
+                this.votes += 1
+            }
         }
-        // for of - для массивов
-        const myArray = [true, 10, 'abc', null]
-        for (const element of myArray)
-        {
-            console.log(element)
-        }
-        // for of - нельзя использовать для объектов
-        /*let myObject = {
-            x: 10,
-            y: true,
-            z: 'abc'
-        }
-        for (const prop of myObject)
-        {
-            console.log(prop)
-        }*/
+        const firstComment = new Comment('First Comment')   // создание экземпляра класса
+        console.log(firstComment)
+
     </script>
 </html>
