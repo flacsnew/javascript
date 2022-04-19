@@ -11,20 +11,20 @@
 </body>
     <script>
         // Async - await
+        const timerPromise = () =>
+            new Promise((resolve, reject) =>
+                setTimeout(() => resolve(), 2000))
+        
         const asyncFn = async () => {
-			return 'Success!'
-		}
-        console.log(asyncFn())
-        // return value
-        asyncFn().then(value => console.log(value))
-        // return error
-        const asyncFnError = async () => {
-            throw new Error('Error function')
+            console.log('Timer Starts.')
+            const startTime = performance.now()
+            await timerPromise()
+            // Функция дальше не выполняется пока не получен результат промиса
+            // (исполнен/отклонен)
+            const endTime = performance.now()
+            console.log('Timer End.', endTime - startTime)
         }
-        // Ловим исключение ошибки
-        asyncFnError()
-            .then(value => console.log(value))
-            .catch(error => console.log(error.message))
+        asyncFn()
 
     </script>
 </html>
