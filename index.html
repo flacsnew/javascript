@@ -11,20 +11,19 @@
 </body>
     <script>
         // Async - await
-        const timerPromise = () =>
-            new Promise((resolve, reject) =>
-                setTimeout(() => resolve(), 2000))
-        
-        const asyncFn = async () => {
-            console.log('Timer Starts.')
-            const startTime = performance.now()
-            await timerPromise()
-            // Функция дальше не выполняется пока не получен результат промиса
-            // (исполнен/отклонен)
-            const endTime = performance.now()
-            console.log('Timer End.', endTime - startTime)
+        const getData = async (url) => {
+            const res = await fetch(url)
+            const json = await res.json()
+            return json
         }
-        asyncFn()
 
+        const url = 'https://jsonplaceholder.typicode.com/todos/10'
+        try {
+            const data = await getData(url) // нет отработки ошибок
+            console.log(data)
+        } catch (error) {
+            console.log(error.message)
+        }
+          
     </script>
 </html>
