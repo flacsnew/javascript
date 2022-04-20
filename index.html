@@ -10,105 +10,38 @@
     
 </body>
     <script>
-        // Работа с DOM
-        // Создать div
-        const div = document.createElement('div')
-        // Добавить класс wrapper
-        div.classList.add('wrapper')
-        // Поместить его внутрь тега body
-        const body = document.querySelector('body')
-        body.appendChild(div)
-        // Создать заголовок h1 с текстом "DOM (Document Object Model)"
-        const header = document.createElement('h1')
-        header.textContent = 'DOM (Document Object Model)'
-        // Добавить h1 перед div.wrapper
-        div.insertAdjacentElement('beforebegin', header)
-        // Создать список ul, добавить в него три элемента (один, два, три)
-        const ul = `
-            <ul>
-                <li>Один</li>
-                <li>Два</li>
-                <li>Три</li>
-            </ul>
-        `;
-        // Поместить список внутрь элемента с классом wrapper
-        div.innerHTML = ul
-        // Создать изображение
-        const img = document.createElement('img')
-        // Добавить атрибут source
-        img.src = 'https://picsum.photos/240'
-        // Добавить атрибут width со значением 240
-        img.width = 240
-        // Добавить класс super
-        img.classList.add('super')
-        // Добавить свойство alt со значением 'Super man'
-        img.alt = 'Super man'
-        // Поместить изображение внутрь элемента с классом wrapper
-        div.appendChild(img)
-        // Используя HTML строку создать div с классом pDiv и 2-мя параграфами
-        const elemHTML = `
-            <div class="pDiv">
-                <p>Параграф 1</p>
-                <p>Параграф 2</p>
-            </div>
-        `;
-        // Поместить этот div до элемента ul
-        const ulList = div.querySelector('ul')
-        ulList.insertAdjacentHTML('beforebegin', elemHTML)
-        // Добавить для 2-го (p) параграфа класс text
-        const pDiv = document.querySelector('.pDiv')
-        pDiv.children[1].classList.add('text')
-        // Удалить 1 параграф
-        pDiv.firstElementChild.remove()
-        // Создать функцию generateAutoCard(), которая принимает 3 аргумента (brand, color, year)
-        // Функция должна возвращать разметкку
-        /*
-            <div class="autoCard">
-                <h2>BRAND YEAR</h2>
-                <p>Автомобиль BRAND - YEAR года. Возраст авто YEARS лет.</p>
-            </div>
-        */
-        const generateAutoCard = (brand, color, year) => {
-            return `
-                <div class="autoCard">
-                    <div>
-                        <h2>${ brand.toUpperCase() } ${year}</h2>
-                        <p>Автомобиль ${brand} - ${year} года. Возраст авто ${ (new Date()).getFullYear() - year } лет.</p>
-                        <p>Цвет: ${color}</p>
-                        <button type="button" class="btn">Удалить</button>
-                    </div>
-                </div>`
-        }
-        // Создать новый div с классом autos
-        const carsDiv = document.createElement('div')
-        carsDiv.classList.add('autos')
-        // Создать 3 карточки авто используя функцию generateAutoCard
-        const carsList = [
-            { brand: 'Tesla', year: 2015, color: 'Красный' },
-            { brand: 'Lexus', year: 2016, color: 'Серебристый' },
-            { brand: 'Nissan', year: 2012, color: 'Черный' }
-        ]
-        const carsHTML = carsList.map(car => {
-            return generateAutoCard(car.brand, car.color, car.year)
-        }).join('')
-        // Поместить эти 3 карточки внутрь div с классом autos
-        carsDiv.innerHTML = carsHTML
-        // Поместить carsDiv до div c классом wrapper
-        const wrapper = document.querySelector('.wrapper')
-        wrapper.insertAdjacentElement('beforebegin', carsDiv)  
-        // При клике на кнопку - удалять карточку из структуры DOM
-        // 1. Выбрать все кнопки
-        const buttons = document.querySelectorAll('.btn')
-        // 2. Создать функцию удаления
-        function handleClick(e){
-            const currentButton = e.currentTarget
-            //currentButton.parentElement.remove()
-            currentButton.closest('.autoCard').remove()
-        }
-        // 3. Использовать цикл, чтобы повесить обработчик события на каждую кнопку
-        buttons.forEach(button => {
-            button.addEventListener('click', handleClick)
-        }) 
-        console.log(buttons)
+        // Паттерны проектирования
+        // Singleton
+        // let instance
+
+        class Counter {
+			constructor(){
+				if ( typeof Counter.instance === 'object' )
+                {
+                    return Counter.instance
+                }
+				this.count = 0
+                Counter.instance = this
+                return this
+			}
+            getCount(){
+                return this.count
+            }
+			incCount(){
+                return this.count++
+			}
+		}
+
+        const obj1 = new Counter()
+        const obj2 = new Counter()
+        
+        obj1.incCount()
+        obj1.incCount()
+        obj2.incCount()
+        obj2.incCount()
+
+        console.log(obj1.getCount())        // 4
+        console.log(obj2.getCount())        // 4
+        
     </script>
 </html>
