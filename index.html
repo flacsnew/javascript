@@ -11,46 +11,72 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Builder
+        // Decorator
+        
         class Car {
             constructor(){
-                this.autopilot = false
-                this.parktronic = false
-                this.signaling = false
+                this.price = 10000
+                this.model = 'Car'
             }
-        }
-        // ---
-        class CarBuilder {
-            constructor(){
-                this.car = new Car()
+            getPrice(){
+                return this.price
             }
-            addAutoPilot(autoPilot){
-                this.car.autopilot = autoPilot
-                return this
-            }
-            addParktronic(parktronic){
-                this.car.parktronic = parktronic
-                return this
-            }
-            addSignaling(signaling){
-                this.car.signaling = signaling
-                return this
-            }
-            updateEngine(engine){
-                this.car.engine = engine
-                return this
-            }
-            build(){
-                return this.car
+            getDescription(){
+                return this.model
             }
         }
 
-        const myCar = new CarBuilder()
-                        .addAutoPilot(true)
-                        .addParktronic(true)
-                        .updateEngine('V8')
-                        .build()
-        console.log(myCar)
+        class Tesla extends Car {
+            constructor(){
+                super()
+                this.price = 25000
+                this.model = 'Tesla'
+            }
+        }
+
+        class Audi extends Car {
+            constructor(){
+                super()
+                this.price = 20000
+                this.model = 'Audi'
+            }
+        }
+
+        // Class Decorators
+        class Autopilot {
+            constructor(car){
+                this.car = car
+            }
+            getPrice(){
+                return this.car.getPrice() + 5000
+            }
+            getDescription(){
+                return `${ this.car.getDescription() } with autopilot`
+            }
+        }
+
+        class Parktronic {
+            constructor(car){
+                this.car = car
+            }
+            getPrice(){
+                return this.car.getPrice() + 3000
+            }
+            getDescription(){
+                return `${ this.car.getDescription() } with parktronic`
+            }
+        }
+
+        // Version autopilot, parktonic
+        let tesla = new Tesla()
+        tesla = new Autopilot(tesla)
+        tesla = new Parktronic(tesla)
+        console.log( tesla.getPrice(), tesla.getDescription() )
+
+        // Version autopilot only
+        let audi = new Audi()
+        audi = new Autopilot(audi)
+        console.log( audi.getPrice(), audi.getDescription() )
 
     </script>
 </html>
