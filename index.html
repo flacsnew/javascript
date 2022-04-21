@@ -11,32 +11,36 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Abstract Factory
-        function bmwProducer(kind){
-            return kind === 'sport' ? sportCarFactory : familyCarFactory
-        }
-        // Factories
-        function sportCarFactory(){
-            return new Z4()
-        }
-        function familyCarFactory(){
-            return new I3()
-        }
-        // Models
-        class Z4{
-            info(){
-                return "Z4 is a sport car"
+        // Prototype
+        class TeslaCar {
+            constructor(model, price, interior, autopilot){
+                this.model = model
+                this.price = price
+                this.interior = interior
+                this.autopilot = autopilot
+            }
+            produce(){
+                return new TeslaCar (
+                    this.model,
+                    this.price,
+                    this.interior,
+                    this.autopilot
+                )
             }
         }
-        class I3{
-            info(){
-                return "I3 is a family car"
-            }
-        }
-        // Init abstract factory sport cars
-        const produce = bmwProducer('sport')
-        // Car producting factory
-        const myCar = new produce()
-        console.log(myCar.info())   // Z4 is a sport car
+        // Produce Base Auto
+        const prototypeCar = new TeslaCar ('S', 80000, 'black', false)
+        // Cloning of Base Auto
+        const car1 = prototypeCar.produce()
+        const car2 = prototypeCar.produce()
+        const car3 = prototypeCar.produce()
+        // Change for particular auto
+        car1.interior = 'white'
+        car1.autopilot = true
+
+        console.log('car1', car1)
+        console.log('car2', car2)
+        console.log('car3', car3)
+        
     </script>
 </html>
