@@ -11,48 +11,37 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Facade
-
-        class Conveyor {
-            setBody() { console.log('Body set!') }
-            getEngine() { console.log('Dismatle engine!') }
-            setEngine() { console.log('Engine Set!') }
-            setInterior() { console.log('Added interior!') }
-            getInterior() { console.log('Update interior!') }
-            setExterior() { console.log('Added exterior!') }
-            setWheels() { console.log('Set wheels!') }
-            addElectonics() { console.log('Added Electronic!') }
-            paint() { console.log('Car Painted!') }
+        // Proxy
+        class carAccess {
+            open(){
+                console.log('Opening car door')
+            }
+            close(){
+                console.log('Closing the car door')
+            }
         }
-
-        class ConveyorFacade {
-            constructor(car){
-                this.car = car
+        class SecutitySystem {
+            constructor(door){
+                this.door = door
             }
-            assembleCar(){
-                this.car.setBody()
-                this.car.setEngine()
-                this.car.setInterior()
-                this.car.setExterior()
-                this.car.setWheels()
-                this.car.addElectonics()
-                this.car.paint()
+            open(password){
+                if (this.auth(password)) {
+                    this.door.open()
+                } else {
+                    console.log('Access denided!')
+                }
             }
-            changeEngine(){
-                this.car.getEngine()
-                this.car.setEngine()
+            auth(password){
+                return password === 'Ilon'
             }
-            changeInterior(){
-                this.car.getInterior()
-                this.car.setInterior()
+            close(){
+                this.door.close()
             }
         }
         // Example
-        const conveyor = new ConveyorFacade(new Conveyor())
-        let car = conveyor.assembleCar()
-        car = conveyor.changeEngine()
-        car = conveyor.changeInterior()
-        console.log(car)
-
+        const door = new SecutitySystem(new carAccess())
+        door.open('Jack')   // Access denided!
+        door.open('Ilon')   // "Opening car door"
+        door.close()        // "Closing the car door"
     </script>
 </html>
