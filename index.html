@@ -11,37 +11,41 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Proxy
-        class carAccess {
-            open(){
-                console.log('Opening car door')
-            }
-            close(){
-                console.log('Closing the car door')
+        // Adapter
+        class Engine2 {
+            simpleInterface(){
+                console.log('Engine 2.0 - tr-tr-tr')
             }
         }
-        class SecutitySystem {
-            constructor(door){
-                this.door = door
-            }
-            open(password){
-                if (this.auth(password)) {
-                    this.door.open()
-                } else {
-                    console.log('Access denided!')
-                }
-            }
-            auth(password){
-                return password === 'Ilon'
-            }
-            close(){
-                this.door.close()
+        class EngineV8 {
+            complecatedInterface(){
+                console.log('Engine V8! - wroom wroom')
             }
         }
-        // Example
-        const door = new SecutitySystem(new carAccess())
-        door.open('Jack')   // Access denided!
-        door.open('Ilon')   // "Opening car door"
-        door.close()        // "Closing the car door"
+        class EngineV8Adapter {
+            constructor(engine){
+                this.engine = engine
+            }
+            simpleInterface(){
+                this.engine.complecatedInterface()
+            }
+        }
+        class Auto {
+            startEngine(engine){
+                engine.simpleInterface()
+            }
+        }
+        // Engine 2.0
+        const myCar = new Auto()
+        const oldEngine = new Engine2()
+        myCar.startEngine(oldEngine)    // Engine 2.0 - tr-tr-tr
+        // Engine V8 with adapter
+        const myCar2 = new Auto()
+        const engineAdapter = new EngineV8Adapter(new EngineV8())
+        myCar2.startEngine(engineAdapter)
+        // Engine V8 without adapter
+        const myCar3 = new Auto()
+        const engineAdapter3 = new EngineV8()
+        myCar3.startEngine(engineAdapter3)  // TypeError: engine.simpleInterface is not a function
     </script>
 </html>
