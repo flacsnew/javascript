@@ -11,37 +11,29 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Singleton
-        // let instance
+        // Factory Method
 
-        class Counter {
-			constructor(){
-				if ( typeof Counter.instance === 'object' )
-                {
-                    return Counter.instance
-                }
-				this.count = 0
-                Counter.instance = this
-                return this
-			}
-            getCount(){
-                return this.count
+        class Bmw {
+            constructor(model, price, maxSpeed){
+                this.model = model
+                this.price = price
+                this.maxSpeed = maxSpeed
             }
-			incCount(){
-                return this.count++
-			}
-		}
+        }
+        class BmwFactory {
+            create(type){
+                if (type === 'X5')
+                    return new Bmw(type, 108000, 300)
+                if (type === 'X6')
+                    return new Bmw(type, 111000, 320) 
+            }
+        }
 
-        const obj1 = new Counter()
-        const obj2 = new Counter()
-        
-        obj1.incCount()
-        obj1.incCount()
-        obj2.incCount()
-        obj2.incCount()
-
-        console.log(obj1.getCount())        // 4
-        console.log(obj2.getCount())        // 4
+        const factory = new BmwFactory()
+        const x5 = factory.create('X5')
+        const x6 = factory.create('X6')
+        console.log('x5', x5)
+        console.log('x6', x6)
         
     </script>
 </html>
