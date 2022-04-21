@@ -11,72 +11,48 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Decorator
-        
-        class Car {
-            constructor(){
-                this.price = 10000
-                this.model = 'Car'
-            }
-            getPrice(){
-                return this.price
-            }
-            getDescription(){
-                return this.model
-            }
+        // Facade
+
+        class Conveyor {
+            setBody() { console.log('Body set!') }
+            getEngine() { console.log('Dismatle engine!') }
+            setEngine() { console.log('Engine Set!') }
+            setInterior() { console.log('Added interior!') }
+            getInterior() { console.log('Update interior!') }
+            setExterior() { console.log('Added exterior!') }
+            setWheels() { console.log('Set wheels!') }
+            addElectonics() { console.log('Added Electronic!') }
+            paint() { console.log('Car Painted!') }
         }
 
-        class Tesla extends Car {
-            constructor(){
-                super()
-                this.price = 25000
-                this.model = 'Tesla'
-            }
-        }
-
-        class Audi extends Car {
-            constructor(){
-                super()
-                this.price = 20000
-                this.model = 'Audi'
-            }
-        }
-
-        // Class Decorators
-        class Autopilot {
+        class ConveyorFacade {
             constructor(car){
                 this.car = car
             }
-            getPrice(){
-                return this.car.getPrice() + 5000
+            assembleCar(){
+                this.car.setBody()
+                this.car.setEngine()
+                this.car.setInterior()
+                this.car.setExterior()
+                this.car.setWheels()
+                this.car.addElectonics()
+                this.car.paint()
             }
-            getDescription(){
-                return `${ this.car.getDescription() } with autopilot`
+            changeEngine(){
+                this.car.getEngine()
+                this.car.setEngine()
+            }
+            changeInterior(){
+                this.car.getInterior()
+                this.car.setInterior()
             }
         }
-
-        class Parktronic {
-            constructor(car){
-                this.car = car
-            }
-            getPrice(){
-                return this.car.getPrice() + 3000
-            }
-            getDescription(){
-                return `${ this.car.getDescription() } with parktronic`
-            }
-        }
-
-        // Version autopilot, parktonic
-        let tesla = new Tesla()
-        tesla = new Autopilot(tesla)
-        tesla = new Parktronic(tesla)
-        console.log( tesla.getPrice(), tesla.getDescription() )
-
-        // Version autopilot only
-        let audi = new Audi()
-        audi = new Autopilot(audi)
-        console.log( audi.getPrice(), audi.getDescription() )
+        // Example
+        const conveyor = new ConveyorFacade(new Conveyor())
+        let car = conveyor.assembleCar()
+        car = conveyor.changeEngine()
+        car = conveyor.changeInterior()
+        console.log(car)
 
     </script>
 </html>
