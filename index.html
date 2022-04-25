@@ -11,33 +11,47 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Flyweight
-        class Auto {
-            constructor(model){
-                this.model = model;
+        // Mediator
+        class OfficialDealer {
+            constructor(){
+                this.customers = [];
+            }
+            orderAuto(customer, auto, info){
+                const name = customer.getName();
+                console.log(`Order Name: ${name}. Order auto is ${auto}`);
+                console.log(`Additional Info: ${info}`);
+                this.addToCustomersList(name);
+            }
+            addToCustomersList(name){
+                this.customers.push(name);  // Запись в массив
+            }
+            getCustomersList(){
+                return this.customers;
             }
         }
-        class AutoFactory {
-            constructor(name){
-                this.models = {}
+        class Customer {
+            constructor(name, dealerMediator){
+                this.name = name;
+                this.dealerMediator = dealerMediator;
             }
-            create(name){
-                let model = this.models[name];
-                if (model) return model;    // Если существует - выходим
-                console.count('model');     // console counter
-                this.models[name] = new Auto(name);
-                return this.models[name];
+            getName(){
+                return this.name;
             }
-            getModels(){
-                console.table(this.models);
+            makeOrder(auto, info){
+                this.dealerMediator.orderAuto(this, auto, info);
             }
         }
-        // Example
-        const factory = new AutoFactory();
-        const bmw = factory.create('Bmw');
-        const audi = factory.create('Audi');
-        const tesla = factory.create('Tesla');
-        const blackTesla = factory.create('Tesla');
-        console.log(factory.getModels());
+        // --
+        const mediator = new OfficialDealer();
+        const alex = new Customer('Alex', mediator);
+        const valera = new Customer('Valera', mediator);
+        alex.makeOrder('Tesla', 'with autopilot!');
+        // Order Name: Alex. Order auto is Tesla
+        // Additional Info: with autopilot
+        valera.makeOrder('Audi', 'with parktronik!');
+        // Order Name: Valera. Order auto is Audi
+        // Additional Info: with parktronik
+        console.log(mediator.getCustomersList());
+        // ['Alex', 'Valera']
     </script>
 </html>
