@@ -11,67 +11,50 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Composite
-        class Equipment {
-            getPrice(){
-                return this.price || 0
-            }
-            getName(){
-                return this.name
-            }
-            setName(name){
-                this.name = name
-            }
-            setPrice(price){
-                this.price = price
+        // Bridge
+        // Class Color - выступает мостом
+        class Model {
+            constructor (color){
+                this.color = color;
             }
         }
-        class Engine extends Equipment {
-            constructor(){
-                super()
-                this.name = 'Engine'
-                this.setPrice(800)
+        class Color {
+            constructor (type){
+                this.type = type;
+            }
+            get(){
+                return this.type;
             }
         }
-        class Body extends Equipment {
-            constructor(){
-                super()
-                this.name = 'Body'
-                this.setPrice(3000)
+        class BlackColor extends Color {
+            constructor (){
+                super('dark-black');
             }
         }
-        class Tools extends Equipment {
-            constructor(){
-                super()
-                this.name = 'Tools'
-                this.setPrice(4000)
+        class SilbrigColor extends Color {
+            constructor (){
+                super('Silbermetallic');
             }
         }
-        class Composite extends Equipment {
-            constructor(){
-                super()
-                this.equipments = []
+
+        class Audi extends Model {
+            constructor(color){
+                super(color);
             }
-            add(equipment){
-                this.equipments.push(equipment)
-            }
-            getPrice(){
-                return this.equipments
-                    .map(equipment => equipment.getPrice())
-                    .reduce((a, b) => a + b)
+            paint(){
+                return `Auto: Audi. Color: ${ this.color.get() }`
             }
         }
-        class Car extends Composite {
-            constructor(){
-                super()
-                this.setName('Audi')
+        class Bmw extends Model {
+            constructor(color){
+                super(color);
+            }
+            paint(){
+                return `Auto: Bmw. Color: ${ this.color.get() }`
             }
         }
         // ---
-        const myCar = new Car()
-        myCar.add(new Engine())
-        myCar.add(new Body())
-        myCar.add(new Tools())
-        console.log(`${ myCar.getName() } price is ${ myCar.getPrice() }$`)
+        const blackBmw = new Bmw( new BlackColor() );
+        console.log( blackBmw.paint() );   // Auto: Bmw. Color: dark-black
     </script>
 </html>
