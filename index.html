@@ -11,47 +11,30 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Mediator
-        class OfficialDealer {
-            constructor(){
-                this.customers = [];
+        // Iterator
+        class Iterator {
+            constructor(el){
+                this.index = 0;
+                this.keys = Object.keys(el);
+                this.elements = el;
             }
-            orderAuto(customer, auto, info){
-                const name = customer.getName();
-                console.log(`Order Name: ${name}. Order auto is ${auto}`);
-                console.log(`Additional Info: ${info}`);
-                this.addToCustomersList(name);
+            next(){
+                return this.elements[this.keys[this.index++]];
             }
-            addToCustomersList(name){
-                this.customers.push(name);  // Запись в массив
-            }
-            getCustomersList(){
-                return this.customers;
-            }
-        }
-        class Customer {
-            constructor(name, dealerMediator){
-                this.name = name;
-                this.dealerMediator = dealerMediator;
-            }
-            getName(){
-                return this.name;
-            }
-            makeOrder(auto, info){
-                this.dealerMediator.orderAuto(this, auto, info);
+            hasNext(){
+                return this.index < this.keys.length;
             }
         }
         // --
-        const mediator = new OfficialDealer();
-        const alex = new Customer('Alex', mediator);
-        const valera = new Customer('Valera', mediator);
-        alex.makeOrder('Tesla', 'with autopilot!');
-        // Order Name: Alex. Order auto is Tesla
-        // Additional Info: with autopilot
-        valera.makeOrder('Audi', 'with parktronik!');
-        // Order Name: Valera. Order auto is Audi
-        // Additional Info: with parktronik
-        console.log(mediator.getCustomersList());
-        // ['Alex', 'Valera']
+        const autos = {
+            audi: { model: 'Audi', color: 'black', price: '20000' },
+            bmw: { model: 'Bmw', color: 'white', price: '30000' },
+            tesla: { model: 'Tesla', color: 'gray', price: '40000' }
+        }
+
+        const collection = new Iterator(autos);
+        while (collection.hasNext()){
+            console.log(collection.next());
+        }
     </script>
 </html>
