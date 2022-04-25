@@ -11,32 +11,59 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Memento
-        class Memento {
-            constructor(value){
-                this.value = value;
+        // Template Method
+        class Builder {
+            build(){
+                this.addEngine();
+                this.installChassis();
+                this.addElectronic();
+                this.collectAccessories();
             }
         }
-        const creator = {
-            save: val => new Memento(val),
-            restore: memento => memento.value
+        class TeslaBuilder extends Builder {
+            addEngine(){
+                console.log('Add Electronic Engine');
+            }
+            installChassis(){
+                console.log('install Tesla Chassis');
+            }
+            addElectronic(){
+                console.log('Add Special Electronic');
+            }
+            collectAccessories(){
+                console.log('collect Accessories');
+            }
         }
-        class CareTaker {
-            constructor(){
-                this.values = [];
+        class BmwBuilder extends Builder {
+            addEngine(){
+                console.log('Add Bmw Engine');
             }
-            addMemento(memento){
-                this.values.push(memento);
+            installChassis(){
+                console.log('install Bmw Chassis');
             }
-            getMemento(index){
-                return this.values[index];
+            addElectronic(){
+                console.log('Add Special Electronic');
+            }
+            collectAccessories(){
+                console.log('collect Accessories');
             }
         }
-        // ---
-        const careTaker = new CareTaker();
-        careTaker.addMemento(creator.save('Hello'));
-        careTaker.addMemento(creator.save('Hello world!'));
-        careTaker.addMemento(creator.save('Hello world !!!'));
-        console.log(creator.restore(careTaker.getMemento(1)));  // Hello world!
+        // --
+        const teslaBuilder = new TeslaBuilder();
+        const bmwBuilder = new BmwBuilder();
+        teslaBuilder.build();
+        /*
+            Add Electronic Engine
+            install Tesla Chassis
+            Add Special Electronic
+            collect Accessories
+        */
+        bmwBuilder.build();
+        /*
+            Add Bmw Engine
+            install Bmw Chassis
+            Add Special Electronic
+            collect Accessories
+        */
     </script>
 </html>
