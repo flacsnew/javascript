@@ -11,50 +11,33 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Bridge
-        // Class Color - выступает мостом
-        class Model {
-            constructor (color){
-                this.color = color;
+        // Flyweight
+        class Auto {
+            constructor(model){
+                this.model = model;
             }
         }
-        class Color {
-            constructor (type){
-                this.type = type;
+        class AutoFactory {
+            constructor(name){
+                this.models = {}
             }
-            get(){
-                return this.type;
+            create(name){
+                let model = this.models[name];
+                if (model) return model;    // Если существует - выходим
+                console.count('model');     // console counter
+                this.models[name] = new Auto(name);
+                return this.models[name];
             }
-        }
-        class BlackColor extends Color {
-            constructor (){
-                super('dark-black');
-            }
-        }
-        class SilbrigColor extends Color {
-            constructor (){
-                super('Silbermetallic');
+            getModels(){
+                console.table(this.models);
             }
         }
-
-        class Audi extends Model {
-            constructor(color){
-                super(color);
-            }
-            paint(){
-                return `Auto: Audi. Color: ${ this.color.get() }`
-            }
-        }
-        class Bmw extends Model {
-            constructor(color){
-                super(color);
-            }
-            paint(){
-                return `Auto: Bmw. Color: ${ this.color.get() }`
-            }
-        }
-        // ---
-        const blackBmw = new Bmw( new BlackColor() );
-        console.log( blackBmw.paint() );   // Auto: Bmw. Color: dark-black
+        // Example
+        const factory = new AutoFactory();
+        const bmw = factory.create('Bmw');
+        const audi = factory.create('Audi');
+        const tesla = factory.create('Tesla');
+        const blackTesla = factory.create('Tesla');
+        console.log(factory.getModels());
     </script>
 </html>
