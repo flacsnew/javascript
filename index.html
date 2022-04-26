@@ -11,60 +11,45 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Command
-        class Driver {
-            constructor(command){
-                this.command = command;
-            }
-            execute(){
-                this.command.execute();
-            }
-        }
-
-        class Engine {
+        // Observer
+        class AutoNews {
             constructor(){
-                this.state = false;
+                this.news = '';
+                this.actions = [];
             }
-            on(){
-                this.state = true;
+            setNews(text){
+                this.news = text;
+                this.notifyAll();
             }
-            off(){
-                this.state = false;
+            notifyAll(){
+                return this.actions.forEach(subs => subs.inform(this));     // оповещаем всех
             }
-        }
-
-        class OnStartCommand {
-            constructor(engine){
-                this.engine = engine;
+            register(observer){
+                this.actions.push(observer);
             }
-            execute(){
-                this.engine.on();
-            }
-        }
-        class OnSwithOffCommand {
-            constructor(engine){
-                this.engine = engine;
-            }
-            execute(){
-                this.engine.off();
+            unregister(observer){
+                this.actions = this.actions.filter(el => !(el instanceof observer));    // удаляем подписчика
             }
         }
-        // Check engine status
-        const engine = new Engine()
-        console.log(engine);
+        // subs
+        class Jack {
+            inform(message){
+                console.log(`Jack has been informed about: ${message.news}`);
+            }
+        }
+        class Max {
+            inform(message){
+                console.log(`Max has been informed about: ${message.news}`);
+            }
+        }
+        // --
+        const autoNews = new AutoNews();
+        autoNews.register(new Jack);
+        autoNews.register(new Max);
+        autoNews.setNews('New Tesla price it 40 000');
         /*
-            {
-                "state": false
-            }
-        */
-        const onStartCommand = new OnStartCommand(engine);
-        const driver = new Driver(onStartCommand);
-        driver.execute();
-        console.log(engine);
-        /*
-            {
-                "state": true
-            }
+            Jack has been informed about: New Tesla price it 40 000
+            Max has been informed about: New Tesla price it 40 000
         */
     </script>
 </html>
