@@ -10,29 +10,25 @@
     
 </body>
     <script>
-       // Function declaration
-       // Замечания: Такие функции можно вызвать до объявления.
-       console.log('sum:',sum(2, 3));       // 5
-       function sum(a, b){
-            return a + b;
+       // this
+       const user = {
+           name: 'Max'
        }
-       // Function expression
-       // console.log('sum1:', sum1(2,3));     // error
-       const sum1 = function (a, b){
-            return a + b;
+       const user2 = {
+           name: 'Jack'
        }
-       // Name function expression
-       // Используется, чтобы внутри функции вызвать саму себя
-       const func = function sum(a, b){
-            return a + b;
+       user2.sayHi = function(){
+            console.log('Hello ' + this.name);
        }
-       // Функция факториала
-       let f = function factorial(n) {
-            return (n != 1) ? n * factorial(n - 1) : 1;
+       user2.sayHi('flacs');
+
+       // this without arguments (window)
+       // use strict -> undefined
+       function func(){
+           // 'use strict'
+           console.log(this);
        }
-       let g = f;
-       f = null;
-       // console.log(factorial(5));
-       console.log(g(5));
+       func();
+
     </script>
 </html>
