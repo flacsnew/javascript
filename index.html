@@ -10,25 +10,32 @@
     
 </body>
     <script>
-       // this
-       const user = {
-           name: 'Max'
-       }
-       const user2 = {
-           name: 'Jack'
-       }
-       user2.sayHi = function(){
-            console.log('Hello ' + this.name);
-       }
-       user2.sayHi('flacs');
-
-       // this without arguments (window)
-       // use strict -> undefined
-       function func(){
-           // 'use strict'
-           console.log(this);
-       }
-       func();
-
+        // closures - Замыкания
+        /*function sayHi(name){
+            // Lexical Env = { name: 'Jack', phrase: 'undefined' }
+            let phrase = 'Hello, ' + name;
+            // Lexical Env = { name: 'Jack', phrase: 'Hello, Jack' }
+            console.log(phrase);
+        }
+        sayHi('Jack');*/
+        // Замыкания
+        // Все переменные и параметры функций являются свойствами объекта переменных Lexical Env,
+        // каждый запуск функции создает новый такой объект, на верхнем уровне им является глобальный объект (window)
+        // при создании function получает служебное свойство scope, которое ссылается на Lexical Env в котором она была создана.
+        // При вызове функции куда бы ее не передали в коде, она будет искать переменные сначала у себя, а потом затем во внешних Lexical Env
+        // с места его рождения
+        function makeCounter(){
+            let currentCount = 1;
+            return function(){
+                return currentCount++;
+            }
+        }
+        const counter = makeCounter();
+        /*console.log(counter());
+        console.log(counter());
+        console.log(counter());*/
+        const counter2 = makeCounter();
+        console.log(counter2());
+        console.log(counter2());
     </script>
 </html>
