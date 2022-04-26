@@ -10,32 +10,45 @@
     
 </body>
     <script>
-        // closures - Замыкания
-        /*function sayHi(name){
-            // Lexical Env = { name: 'Jack', phrase: 'undefined' }
-            let phrase = 'Hello, ' + name;
-            // Lexical Env = { name: 'Jack', phrase: 'Hello, Jack' }
-            console.log(phrase);
+        // let, var, const
+        // var
+        // Можно обновлять, и можно повторно объявлять
+        var number = 10;
+        console.log(number);
+        var number = 22;
+        console.log(number);
+        // Область видимости
+        function getNumber(){
+            // Область видимости - это функция
+            var number2 = 10;
         }
-        sayHi('Jack');*/
-        // Замыкания
-        // Все переменные и параметры функций являются свойствами объекта переменных Lexical Env,
-        // каждый запуск функции создает новый такой объект, на верхнем уровне им является глобальный объект (window)
-        // при создании function получает служебное свойство scope, которое ссылается на Lexical Env в котором она была создана.
-        // При вызове функции куда бы ее не передали в коде, она будет искать переменные сначала у себя, а потом затем во внешних Lexical Env
-        // с места его рождения
-        function makeCounter(){
-            let currentCount = 1;
-            return function(){
-                return currentCount++;
-            }
+        // console.log('function:', number2);  // error
+        getNumber();
+        // ---
+        var weight = 10;
+        if (weight > 8)
+        {
+            const kilograms = `Вес ${weight} кг.`;
+            console.log(kilograms);
         }
-        const counter = makeCounter();
-        /*console.log(counter());
-        console.log(counter());
-        console.log(counter());*/
-        const counter2 = makeCounter();
-        console.log(counter2());
-        console.log(counter2());
+        // let, const - Область видимости это блок
+        // ОБъявлять можем только один раз!
+        let speed = 60;
+        // let speed = 40;
+        let straf = false;      // первая область видимости
+        if (speed > 50) {
+            let straf = true;   // вторая область видимости
+        }
+        // Отличия let, const
+        const car = 'Tesla';
+        speed = 40;
+        // car = 'Nissan';         // error (только если примитивные типы)
+        // Если объект, то мы можем обновлять его поля
+        const car_object = {
+            name: 'Tesla'
+        }
+        // Object.freeze(car_object); // запрещаем изменять объект
+        car_object.name = 'Nissan';
+        console.log(car_object);
     </script>
 </html>
