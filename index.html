@@ -11,41 +11,60 @@
 </body>
     <script>
         // Паттерны проектирования
-        // Visitor
-        class Auto {
-            accept(visitor){
-                visitor(this);
+        // Command
+        class Driver {
+            constructor(command){
+                this.command = command;
+            }
+            execute(){
+                this.command.execute();
             }
         }
-        class Tesla extends Auto {
-            info(){
-                return 'It is a Tesla Car!';
+
+        class Engine {
+            constructor(){
+                this.state = false;
+            }
+            on(){
+                this.state = true;
+            }
+            off(){
+                this.state = false;
             }
         }
-        class Bmw extends Auto {
-            info(){
-                return 'It is a Bmw Car!';
+
+        class OnStartCommand {
+            constructor(engine){
+                this.engine = engine;
+            }
+            execute(){
+                this.engine.on();
             }
         }
-        class Audi extends Auto {
-            info(){
-                return 'It is a Audi Car!';
+        class OnSwithOffCommand {
+            constructor(engine){
+                this.engine = engine;
+            }
+            execute(){
+                this.engine.off();
             }
         }
-        function exportVisitor(auto){
-            if ( auto instanceof Tesla )
-                auto.export = console.log(`Exported data: ${auto.info()}`);
-            if ( auto instanceof Bmw )
-                auto.export = console.log(`Exported data: ${auto.info()}`);
-            if ( auto instanceof Audi )
-                auto.export = console.log(`Exported data: ${auto.info()}`);
-        }
-        // ---
-        const tesla = new Tesla();
-        const bmw = new Bmw();
-        console.log(tesla.accept(exportVisitor));
-        // Exported data: It is a Tesla Car!
-        console.log(bmw.accept(exportVisitor));
-        // Exported data: It is a Bmw Car!
+        // Check engine status
+        const engine = new Engine()
+        console.log(engine);
+        /*
+            {
+                "state": false
+            }
+        */
+        const onStartCommand = new OnStartCommand(engine);
+        const driver = new Driver(onStartCommand);
+        driver.execute();
+        console.log(engine);
+        /*
+            {
+                "state": true
+            }
+        */
     </script>
 </html>
