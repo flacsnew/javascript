@@ -10,16 +10,29 @@
     
 </body>
     <script>
-        function setAlphabet(separator){
-            //let arr = Array.prototype.slice.call(arguments);
-            let arr = [...arguments];
-            /*for (let i = 1; i < arguments.length; i++)
-            {
-                arr[i-1] = arguments[i];
-            }*/
-            //console.log(arr.concat(['f']));
-            return arr.join(separator);
-        }
-        console.log(setAlphabet('-','a','b','c','d','e'));
+       // Function declaration
+       // Замечания: Такие функции можно вызвать до объявления.
+       console.log('sum:',sum(2, 3));       // 5
+       function sum(a, b){
+            return a + b;
+       }
+       // Function expression
+       // console.log('sum1:', sum1(2,3));     // error
+       const sum1 = function (a, b){
+            return a + b;
+       }
+       // Name function expression
+       // Используется, чтобы внутри функции вызвать саму себя
+       const func = function sum(a, b){
+            return a + b;
+       }
+       // Функция факториала
+       let f = function factorial(n) {
+            return (n != 1) ? n * factorial(n - 1) : 1;
+       }
+       let g = f;
+       f = null;
+       // console.log(factorial(5));
+       console.log(g(5));
     </script>
 </html>
