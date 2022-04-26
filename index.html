@@ -10,55 +10,16 @@
     
 </body>
     <script>
-        // Паттерны проектирования
-        // State
-        class OrderStatus {
-            constructor(name, nextStatus){
-                this.name = name;
-                this.nextStatus = nextStatus;
-            }
-            next(){
-                return new this.nextStatus();
-            }
+        function setAlphabet(separator){
+            //let arr = Array.prototype.slice.call(arguments);
+            let arr = [...arguments];
+            /*for (let i = 1; i < arguments.length; i++)
+            {
+                arr[i-1] = arguments[i];
+            }*/
+            //console.log(arr.concat(['f']));
+            return arr.join(separator);
         }
-        // steps delivered
-        class WaitingForPayment extends OrderStatus {
-            constructor(){
-                super('waitingForPayment', Shipping);
-            }
-        }
-        class Shipping extends OrderStatus {
-            constructor(){
-                super('shipping', Delivired);
-            }
-        }
-        class Delivired extends OrderStatus {
-            constructor(){
-                super('delivired', Delivired);
-            }
-        }
-        class Order {
-            constructor(){
-                this.state = new WaitingForPayment();
-            }
-            nextState(){
-                this.state = this.state.next();
-            }
-            cancelOrder(){
-                this.state.name === 'waitingForPayment' 
-                    ? console.log('Order is canceled')
-                    : console.log('Order can not be canceled')
-            }
-        }
-        // --
-        const myOrder = new Order();
-        console.log(myOrder.state.name);    // waitingForPayment
-        // myOrder.cancelOrder();
-        myOrder.nextState();
-        console.log(myOrder.state.name);    // shipping
-        myOrder.nextState();
-        console.log(myOrder.state.name);    // delivired
-        // Try cancel order
-        myOrder.cancelOrder();
+        console.log(setAlphabet('-','a','b','c','d','e'));
     </script>
 </html>
