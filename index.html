@@ -12,30 +12,58 @@
     </div>
 </body>
     <script>
-        // Arrow Functions - Стрелочные функции
-        const fruits = ['яблоки', 'бананы', 'сливы'];
-        const freshFruits = fruits.map(elem => `Свежие ${elem}`);
-        console.log(freshFruits);
-        // Все стрелочные функции анонимные.
-        const getFresh = (fruit) => {
-            console.log(fruit);
+        // Шаблонные строки
+        const car = 'Tesla';
+        const carYear = 2018;
+        //const details = 'Автомобилю ' + car + ' ' + (2022 - carYear) + ' года';
+        // Удобный синтаксис
+        const details = `Автомобилю ${car} - ${(2022 - carYear)} года`;
+        // Перенос строк
+        const text = 'Автомобиль \
+        проехал \
+        10 км \
+        ';
+        const carObject = {
+            name: 'Tesla',
+            year: 2018
         }
-        getFresh('яблоко');
-        // Значение this внутри стрелочной функции наследуется из родительской внешней функции,
-        // т.е. стрелочная функция не создает свой контекст исполнения, а вместо этого использует внешний контекст
-        const header = document.querySelector('.header');
-        // header.addEventListener('click', () => {
-        // this привязывается к внешнему контексту - выше по иерархии объект window
-        header.addEventListener('click', function(){
-            console.log(this);
-            this.style.color = 'green';
-            this.style.fontWeight = 'bold';
-            this.style.marginTop = '200px';
-            // setTimeout(function(){
-            setTimeout(() => {
-                this.style.color = 'red';
-                this.style.textTransform = 'uppercase';
-            }, 2000);
-        });
+        const html = `
+            <div>
+                <h2>${carObject.name}</h2>
+                <p>${carObject.year}</p>
+            </div>
+        `;
+        console.log(html);
+        document.body.innerHTML = html;
+        // Вложенная структура
+        const cars = [
+            {
+                name: 'Tesla',
+                year: 2018
+            },
+            {
+                name: 'Nissan',
+                year: 2019
+            },
+        ];
+        const htmlCars = `<ul>
+                ${cars.map(car => `<li>${car.name}</li>`).join('')}
+        </ul>`;
+        console.log(htmlCars);
+        document.body.innerHTML = htmlCars;
+        // Условие внутри шаблонной строки
+        const car_item = {
+            name: 'Tesla',
+            year: 2018,
+            info: 'Electric car'
+        }
+        const htmlCar = `
+            <div>
+                <p>Название: ${car_item.name}</p>
+                <p>Год: ${car_item.year}</p>
+                ${car_item.info ? `<p>Информация: ${car_item.info}</p>` : `<p>Информация: нет</p>`}
+            </div>
+        `;
+        document.body.innerHTML = htmlCar;
     </script>
 </html>
