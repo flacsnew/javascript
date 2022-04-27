@@ -7,52 +7,42 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div class="cars">
+        <span>Tesla</span>
+        <span>Nissan</span>
+        <span>Bmw</span>
+    </div>
 </body>
     <script>
-        // Деструктуризация
-        const width = '200px';
-        const auto = {
-            name: 'Tesla',
-            year: 2019,
-            color: 'silver',
-            dimensions: {
-                size: {
-                    width: '100px',
-                    length: '100px'
-                }
-            }
+        // Оператор ...Spread
+        const regular = ['VW', 'Scoda', 'Audi'];
+        const electric = ['Tesla', 'Bmw i3', 'Jaguar I-Pace'];
+        // Example 1
+        const cars = [...regular, 'Mersedes', ...electric];
+        /*cars = cars.concat(regular);
+        cars.push('Mersedes');
+        cars = cars.concat(electric);*/
+        console.log(cars);
+        // Example 2: Массив
+        const carsNew = [...cars];  // = cars;
+        carsNew[0] = 'Motocycle';
+        console.log('cars', cars);
+        console.log('carsNew', carsNew);
+        // Example 3: Строчное выражение
+        const word = 'Electric';
+        const letters = [...word];
+        console.log(letters);   // массив состоит из каждой буквы (word)
+        // Example 4: Превращаем NodeList в массив
+        const carsList = [...document.querySelectorAll('.cars span')];
+        console.log(carsList);
+        const autosList = carsList.map(car => car.textContent);
+        console.log(autosList);
+        // Example 5: Передаем аргументы массива в функцию
+        const argCars = ['Tesla', 2021];
+        function displayCar(title, year){
+            console.log(`Автомобиль ${title} - ${year} года.`);
         }
-        const autoCars = ['Lexus', 2021, 'green'];
-        const [name1, year1, color1] = autoCars;
-        console.log(name1, year1, color1);
-        const {name, year, color = 'green'} = auto;
-        console.log(name, year, color);
-        // width: carWidth - указание новой переменной, чтобы не было конфликтов с глобальной переменной width
-        const {width: carWidth, length} = auto.dimensions.size;
-        console.log(carWidth, length);
-        // Split method
-        const autoStr = 'Lexus,2021,green';
-        const [name2, year2, color2] = autoStr.split(',');
-        console.log('Split:',name2, year2, color2);
-
-        const autoStr2 = 'Lexus,2021,green,20,discount';
-        const [name3, year3, color3, ...dealer] = autoStr2.split(',');
-        console.log('Rest 2 params:',name3, year3, color3, dealer);
-
-        const [qty, discount] = dealer;
-        console.log(qty, discount);
-
-        function convertRubles(rubles){
-            const complete = {
-                EUR: rubles * 80,
-                USD: rubles * 70,
-                GBP: rubles * 100 
-            };
-            return complete;
-        }
-        const {EUR, USD, GBP} = convertRubles(5000);
-        console.log(EUR, USD, GBP);
+        displayCar(...argCars);
 
     </script>
 </html>
