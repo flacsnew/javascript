@@ -7,63 +7,52 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        Arrow Functions
-    </div>
+
 </body>
     <script>
-        // Шаблонные строки
-        const car = 'Tesla';
-        const carYear = 2018;
-        //const details = 'Автомобилю ' + car + ' ' + (2022 - carYear) + ' года';
-        // Удобный синтаксис
-        const details = `Автомобилю ${car} - ${(2022 - carYear)} года`;
-        // Перенос строк
-        const text = 'Автомобиль \
-        проехал \
-        10 км \
-        ';
-        const carObject = {
+        // Деструктуризация
+        const width = '200px';
+        const auto = {
             name: 'Tesla',
-            year: 2018
+            year: 2019,
+            color: 'silver',
+            dimensions: {
+                size: {
+                    width: '100px',
+                    length: '100px'
+                }
+            }
         }
-        const html = `
-            <div>
-                <h2>${carObject.name}</h2>
-                <p>${carObject.year}</p>
-            </div>
-        `;
-        console.log(html);
-        document.body.innerHTML = html;
-        // Вложенная структура
-        const cars = [
-            {
-                name: 'Tesla',
-                year: 2018
-            },
-            {
-                name: 'Nissan',
-                year: 2019
-            },
-        ];
-        const htmlCars = `<ul>
-                ${cars.map(car => `<li>${car.name}</li>`).join('')}
-        </ul>`;
-        console.log(htmlCars);
-        document.body.innerHTML = htmlCars;
-        // Условие внутри шаблонной строки
-        const car_item = {
-            name: 'Tesla',
-            year: 2018,
-            info: 'Electric car'
+        const autoCars = ['Lexus', 2021, 'green'];
+        const [name1, year1, color1] = autoCars;
+        console.log(name1, year1, color1);
+        const {name, year, color = 'green'} = auto;
+        console.log(name, year, color);
+        // width: carWidth - указание новой переменной, чтобы не было конфликтов с глобальной переменной width
+        const {width: carWidth, length} = auto.dimensions.size;
+        console.log(carWidth, length);
+        // Split method
+        const autoStr = 'Lexus,2021,green';
+        const [name2, year2, color2] = autoStr.split(',');
+        console.log('Split:',name2, year2, color2);
+
+        const autoStr2 = 'Lexus,2021,green,20,discount';
+        const [name3, year3, color3, ...dealer] = autoStr2.split(',');
+        console.log('Rest 2 params:',name3, year3, color3, dealer);
+
+        const [qty, discount] = dealer;
+        console.log(qty, discount);
+
+        function convertRubles(rubles){
+            const complete = {
+                EUR: rubles * 80,
+                USD: rubles * 70,
+                GBP: rubles * 100 
+            };
+            return complete;
         }
-        const htmlCar = `
-            <div>
-                <p>Название: ${car_item.name}</p>
-                <p>Год: ${car_item.year}</p>
-                ${car_item.info ? `<p>Информация: ${car_item.info}</p>` : `<p>Информация: нет</p>`}
-            </div>
-        `;
-        document.body.innerHTML = htmlCar;
+        const {EUR, USD, GBP} = convertRubles(5000);
+        console.log(EUR, USD, GBP);
+
     </script>
 </html>
