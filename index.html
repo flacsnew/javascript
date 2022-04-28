@@ -7,42 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="cars">
-        <span>Tesla</span>
-        <span>Nissan</span>
-        <span>Bmw</span>
-    </div>
+    
 </body>
     <script>
-        // Оператор ...Spread
-        const regular = ['VW', 'Scoda', 'Audi'];
-        const electric = ['Tesla', 'Bmw i3', 'Jaguar I-Pace'];
+        // Оператор ...Rest
         // Example 1
-        const cars = [...regular, 'Mersedes', ...electric];
-        /*cars = cars.concat(regular);
-        cars.push('Mersedes');
-        cars = cars.concat(electric);*/
-        console.log(cars);
-        // Example 2: Массив
-        const carsNew = [...cars];  // = cars;
-        carsNew[0] = 'Motocycle';
-        console.log('cars', cars);
-        console.log('carsNew', carsNew);
-        // Example 3: Строчное выражение
-        const word = 'Electric';
-        const letters = [...word];
-        console.log(letters);   // массив состоит из каждой буквы (word)
-        // Example 4: Превращаем NodeList в массив
-        const carsList = [...document.querySelectorAll('.cars span')];
-        console.log(carsList);
-        const autosList = carsList.map(car => car.textContent);
-        console.log(autosList);
-        // Example 5: Передаем аргументы массива в функцию
-        const argCars = ['Tesla', 2021];
-        function displayCar(title, year){
-            console.log(`Автомобиль ${title} - ${year} года.`);
+        function convertUSD(rate, ...totals){
+            console.log(rate, totals);
+            return totals.map( total => total / rate);
         }
-        displayCar(...argCars);
-
+        const totalList = convertUSD(70, 1000, 800, 6300, 2500, 500, 1600);
+        console.log(totalList);
+        // Example 2
+        const car = ['Tesla', 111, 'red', '50000', '10%', '4wd'];
+        const [name, id, ...options] = car;
+        console.log(name, id, options);
     </script>
 </html>
