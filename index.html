@@ -10,39 +10,82 @@
     
 </body>
     <script>
-        // Цикл for...of (Отличия от других циклов Javascript + использование с объектами)
-        const cars = ['Tesla', 'Bmw', 'Nissan', 'Audi', 'Lexus'];
-        const auto = {
-            name: 'Tesla',
-            year: 2021,
-            color: 'red'
+        // JavaScript Promise. Что это и как работает (+ запросы данных из Coffee API, Beer API и др.)
+        // Пример 1: Базовый promise
+        const listPromise = fetch('https://api.sampleapis.com/countries/countries');
+        listPromise
+            .then(data => data.json())
+            .then(countries => countries)
+            .catch(err => {
+                console.log('Error:', err);
+            });
+        // Пример 2: Свой promise
+        const coffee = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(Error('Ваш кофе готов!'));
+            }, 1500);
+        });
+        coffee
+            .then(data => { console.log(data) })
+            .catch(err => {console.log('Error:', err) });
+
+        // Пример 3: Свой promise с api
+        const family = [
+            {member: 'mother', id: 111, coffee: 'Latte'},
+            {member: 'father', id: 222, coffee: 'Cappuccino'},
+            {member: 'son', id: 333, coffee: 'Espresso'}
+        ]
+        const getCoffee = (member) => {
+            const coffeePromise = fetch('https://api.sampleapis.com/coffee/hot');
+            return coffeePromise
+                    .then(data => data.json())
+                    .then(list => {
+                        console.log('List >>> ', list);
+                        const coffee = list.find(res => res.title === member.coffee);
+                        console.log(coffee);
+                        return {
+                            ...member,
+                            coffee
+                        }
+                    });
         }
-        // Base for
-        /*for (let i = 0; i < cars.length; i++){
-            console.log(cars[i]);
-        }*/
-        /*
-        // Foreach
-        cars.forEach(car => {
-            console.log(car);
-            if (car === 'Tesla') break; // Error: Illegal break statement // нельзя использовать break;
-        });*/
-        // for ... in
-        /*for (const index in cars)
-        {
-            if (index === '1') continue;        // можно использовать break / continue 
-            console.log(cars[index]);
-        }*/
-        // for .. of
-        /*for (const car of cars)
-        {
-            if (car === 'Bmw') continue;        // можно использовать break / continue
-            console.log(car);
-        }*/
-        // for .. of для объектов
-        for (const car of Object.values(auto))  // Object.values, Object.keys
-        {
-            console.log(car);
+        const getFamilyMember = (id) => {
+            return new Promise( (resolve, reject) => {
+                setTimeout(() => {
+                    const member = family.find(res => res.id === id );
+                    if (member) { resolve(member) } else { reject(Error('Not Found')); }
+                }, 1500);
+            });
         }
+        getFamilyMember(222)
+            .then(data => getCoffee(data))
+            .then( newMember => {
+                console.log('New member >>>', newMember);
+            })
+            .catch(err => {console.log('Error:', err)});
+
+        // Пример 4: Promise.all
+        const makeCoffie = () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('Ваш кофе готов!');
+                }, 500);
+            });
+        }
+        const makeToast = () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('Ваши тосты готовы!');
+                }, 2500);
+            });
+        }
+
+        const coffeePromise = makeCoffie();
+        const toastPromise = makeToast();
+        // После выполнения двух Promise
+        Promise.all([coffeePromise, toastPromise]).then(data => {
+            console.log(data);
+        });
+        
     </script>
 </html>
