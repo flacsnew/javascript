@@ -10,17 +10,39 @@
     
 </body>
     <script>
-        // Оператор ...Rest
-        // Example 1
-        function convertUSD(rate, ...totals){
-            console.log(rate, totals);
-            return totals.map( total => total / rate);
+        // Цикл for...of (Отличия от других циклов Javascript + использование с объектами)
+        const cars = ['Tesla', 'Bmw', 'Nissan', 'Audi', 'Lexus'];
+        const auto = {
+            name: 'Tesla',
+            year: 2021,
+            color: 'red'
         }
-        const totalList = convertUSD(70, 1000, 800, 6300, 2500, 500, 1600);
-        console.log(totalList);
-        // Example 2
-        const car = ['Tesla', 111, 'red', '50000', '10%', '4wd'];
-        const [name, id, ...options] = car;
-        console.log(name, id, options);
+        // Base for
+        /*for (let i = 0; i < cars.length; i++){
+            console.log(cars[i]);
+        }*/
+        /*
+        // Foreach
+        cars.forEach(car => {
+            console.log(car);
+            if (car === 'Tesla') break; // Error: Illegal break statement // нельзя использовать break;
+        });*/
+        // for ... in
+        /*for (const index in cars)
+        {
+            if (index === '1') continue;        // можно использовать break / continue 
+            console.log(cars[index]);
+        }*/
+        // for .. of
+        /*for (const car of cars)
+        {
+            if (car === 'Bmw') continue;        // можно использовать break / continue
+            console.log(car);
+        }*/
+        // for .. of для объектов
+        for (const car of Object.values(auto))  // Object.values, Object.keys
+        {
+            console.log(car);
+        }
     </script>
 </html>
